@@ -23,6 +23,7 @@ def run_with_video_inference(video_file, project_id, model_num, confidence_thres
     print("hey")
     project = rf.workspace().project(project_id)
     model = project.version(model_num).model
+    print(video_file)
     job_id, signed_url, expire_time = model.predict_video(
     video_file,
     fps=fps,
@@ -136,7 +137,7 @@ def run_everything(filepath):
     # video_file = 'testvideo2.mp4'
     video_file = filepath
     print(filepath)
-    video_file = './demo.mp4'
+    # video_file = './demo.mp4'
     project_id = "pestnet-i2j4d"
     confidence_threshold = 0.8
     model_num = 2

@@ -79,7 +79,7 @@ def compileBugs(bugDict: dict):
         jsonList.append({"bug":pest.name, "timestamp":pest.timeStamps, "description":pest.description})
     my_dict = {}
     my_dict["insects"] = jsonList
-    return(json.dumps(my_dict))
+    return(my_dict)
 
 # if __name__ == '__main__':
 #     compileBugs({})

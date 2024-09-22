@@ -13,6 +13,10 @@ function App() {
   const [loader, setLoader] = useState(false);
   const [isSlidesOn, setIsSlidesOn] = useState(false);
   const [data, setData] = useState<Array<BugDetails>>([]);
+  useEffect(() => {
+    setData([{"bug": "Caterpillar", "timestamp": ["0:13-0:15-0:15", "0:23-1:19-1:19"], "description": "remove caterpillars and eggs where discovered and put them in soapy water; spray at them directly with soapy water, vinegar mixture, or insecticide"}, {"bug": "Beetle", "timestamp": ["0:12-0:13-0:13"], "description": "sprinkle Diatomaceous earth (keep soil dry); spray or pour soapy water, vinegar water, or boiling water"}]);
+
+  }, [])
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -20,7 +24,7 @@ function App() {
       setLoader(true);
       try {
         const formData = new FormData();
-        formData.append("cow", "name");
+        formData.append("cow", "cow");
         formData.append("video", selectedFile);
         const res = await fetch("http://127.0.0.1:8000/upload", {
           method: "POST",
@@ -65,7 +69,7 @@ function App() {
         className="p-12"
       >
         <div className="bg-white h-full w-full flex items-center justify-center">
-          {!loader && !isSlidesOn && (
+          {loader && !isSlidesOn && (
             <div className="flex flex-col items-center w-[40%] text-center">
               <p style={{ color: "#453030" }} className="text-4xl my-3">
                 Upload a .MP4 video of the pest/plants here
@@ -119,7 +123,7 @@ function App() {
               <LoadingAnimation />
             </div>
           )}
-          {isSlidesOn && (
+          {!isSlidesOn && (
             <div className="h-full w-full grid grid-cols-2">
               <div className="h-full w-full flex justify-center items-center">
                 <ReactPlayer
