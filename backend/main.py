@@ -3,8 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from tempfile import NamedTemporaryFile
 from pydantic import BaseModel
-import pests, data.Pest as Pest
-import os
+import pests, os, json
 
 app = FastAPI()
 
@@ -48,4 +47,9 @@ def detect_faces(cow: str = Form(...), video: UploadFile = File(...)):
    
 @app.get("/pests")
 def get_bugs():
-    return pests.compileBugs()
+    jsonData = json.dumps(pests.compileBugs({"caterpillar": [(13.12, 15.17), (23.47, 79.5)]}))
+    print(jsonData)
+    with open('data.json', 'w') as json_file:
+        json.dump(pests.compileBugs({"caterpillar": [(13.12, 15.17), (23.47, 79.5)], "beetle": [(12.1, 13)]}), json_file)
+
+get_bugs()
