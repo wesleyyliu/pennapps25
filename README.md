@@ -2,7 +2,7 @@
 
 ## Project Idea: PestNet
 
-We are developing an agricultural pest detector. Gardeners and farmers can monitor their plants with a camera, and our model will take in an image/video and identify which pests have been causing problems to the plant. This will help gardeners and farmers monitor their plant health and respond appropriately to protect their plants.
+We are developing an agricultural pest detector. Gardeners and farmers can monitor their plants with a camera, and our model will take in a video and identify which pests have been causing problems to the plant. This will help gardeners and farmers monitor their plant health and respond appropriately to protect their plants.
 
 TLDR: Used for garden plants, finding out which pests have been eating your produce
 
@@ -42,3 +42,8 @@ Technologies used:
 - OpenCV
 - Roboflow
 
+## Team Info
+David Fu: davidcfu@sas.upenn.edu
+Alice Liu: aliu17@seas.upenn.edu
+Wesley Liu: wesliu@seas.upenn.edu
+Maxwell Ye: maxwelly@seas.upenn.edu
