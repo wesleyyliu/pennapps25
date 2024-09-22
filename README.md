@@ -43,7 +43,7 @@ Technologies used:
 - Roboflow
 
 ## Team Info
-David Fu: davidcfu@sas.upenn.edu
-Alice Liu: aliu17@seas.upenn.edu
-Wesley Liu: wesliu@seas.upenn.edu
-Maxwell Ye: maxwelly@seas.upenn.edu
+David Fu: davidcfu@sas.upenn.edu  
+Alice Liu: aliu17@seas.upenn.edu  
+Wesley Liu: wesliu@seas.upenn.edu  
+Maxwell Ye: maxwelly@seas.upenn.edu  
