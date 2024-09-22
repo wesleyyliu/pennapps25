@@ -3,8 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from tempfile import NamedTemporaryFile
 from pydantic import BaseModel
-import pests, os, json
-import pest_inference
+import pests, os, json, pest_inference
 
 app = FastAPI()
 
@@ -54,6 +53,8 @@ def detect_faces(cow: str = Form(...), video: UploadFile = File(...)):
    
 @app.get("/pests")
 def get_bugs():
+    analysis = pest_inference.run_with_video_inference
+    (os.getenv("ROBOFLOW_API_KEY"), 'testvideo2.mp4', "pestnet-i2j4d", 0.8, 2, 2)
     jsonData = json.dumps(pests.compileBugs({"caterpillar": [(13.12, 15.17), (23.47, 79.5)]}))
     print(jsonData)
     with open('data.json', 'w') as json_file:
