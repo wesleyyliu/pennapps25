@@ -26,3 +26,4 @@ Then, while in backend folder:
 ```poetry shell```  
 ```poetry install```  
 ```fastapi dev main.py```
+

@@ -44,17 +44,4 @@ def detect_faces(cow: str = Form(...), video: UploadFile = File(...)):
     #     os.remove(temp.name)
         
     return {"message":"sup"}
-    
-
-# Access the form at 'http://127.0.0.1:8000/' from your browser
-@app.get('/')
-async def main():
-    content = '''
-    <body>
-    <form action='/upload' enctype='multipart/form-data' method='post'>
-    <input name='file' type='file'>
-    <input type='submit'>
-    </form>
-    </body>
-    '''
-    return HTMLResponse(content=content)
+   
