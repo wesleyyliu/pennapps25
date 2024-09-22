@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from tempfile import NamedTemporaryFile
 from pydantic import BaseModel
+import pests, data.Pest as Pest
 import os
 
 app = FastAPI()
@@ -45,3 +46,6 @@ def detect_faces(cow: str = Form(...), video: UploadFile = File(...)):
         
     return {"message":"sup"}
    
+@app.get("/pests")
+def get_bugs():
+    return pests.compileBugs()
