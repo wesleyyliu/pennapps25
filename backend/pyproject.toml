@@ -6,9 +6,9 @@ authors = ["Maxwell Ye <maxwellzye@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "~3.9"
 fastapi = {extras = ["standard"], version = "^0.115.0"}
-
+python-multipart = "^0.0.10"
 
 [build-system]
 requires = ["poetry-core"]
