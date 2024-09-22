@@ -134,10 +134,3 @@ if __name__ == '__main__':
     fps = 2
 
     print(run_with_video_inference(video_file, project_id, model_num, confidence_threshold, fps, api_key))
-
-    
-
-    
-
-    
-
