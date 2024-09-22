@@ -66,11 +66,11 @@ def compileBugs(bugDict: dict):
             endSecond = endTime % 60
             if startSecond < 10:
                 time = str(startMinute) + ":0" + str(startSecond)
-            else:
-                time = str(startMinute) + ":" + str(startSecond) + "-" + str(endMinute) + ":" + str(endSecond)
+            elif startSecond >= 10:
+                time = str(startMinute) + ":" + str(startSecond)
             if endSecond < 10:
                 time += "-" + str(endMinute) + ":0" + str(endSecond)
-            else:
+            elif endSecond >= 10:
                 time += "-" + str(endMinute) + ":" + str(endSecond)
             times.append(time)
         curBug.timeStamps = times
