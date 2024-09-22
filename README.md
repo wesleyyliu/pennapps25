@@ -21,7 +21,7 @@ Then, while in the frontend folder:
 ```npm run dev``` <-- Do this every time you want start up the frontend
 
 ## Backend
-First, install poetry and python (greater than 3.12).  
+First, install poetry and python (version 3.9).  
 Then, while in backend folder:
 ```poetry shell```  
 ```poetry add python-multipart```  
