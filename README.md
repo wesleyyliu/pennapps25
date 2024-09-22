@@ -23,5 +23,6 @@ Then, while in the frontend folder:
 ## Backend
 First, install poetry and python (greater than 3.12).  
 Then, while in backend folder:
-```poetry shell```  
+```poetry shell```
+```poetry install```  
 ```fastapi dev main.py```
