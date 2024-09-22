@@ -7,9 +7,8 @@ export default function Slideshow({ data }: { data: BugDetails[] }) {
   return (
     <>
     <div style={{ height: "calc(100vh - 192px)" }} className="w-full">
-          <Carousel>
+          <Carousel slide = {false} id="hey">
             {data.map((e, i) => {
-              console.log(e.bug);
               return (
                 <div
                   key={i}
@@ -26,7 +25,7 @@ export default function Slideshow({ data }: { data: BugDetails[] }) {
                     <div className="grid gap-2">
                       <div className="text-2xl bg-[#ADE0E8] rounded-lg p-3">
                         <h1 className="text-center font-bold">
-                          Prevdentive Measures
+                          Preventive Measures
                         </h1>
                         {capitalizeFirstLetter(e.description)}
                       </div>

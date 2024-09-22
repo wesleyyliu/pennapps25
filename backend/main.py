@@ -37,8 +37,8 @@ def detect_faces(cow: str = Form(...), video: UploadFile = File(...)):
             print(david_res)
     except Exception:
         return {"message": "There was an error uploading the file"}
-    # finally:
-    #     video.file.close()
+    finally:
+        video.file.close()
     # temp = NamedTemporaryFile(delete=False)
     # try:
     #     # try:
