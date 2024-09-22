@@ -1,5 +1,5 @@
 from Pest import Pest
-
+import json
 # Initialize a map of bugs
 def initializeBugs():
     ant = Pest("Ant", "", "spray vinegar on soil; mix borax, sugar, and water and place near plant;" + 
@@ -36,8 +36,8 @@ def initializeBugs():
     wasp = Pest("Wasp", "", "spray at late evening or early morning with a mixture soap and water or just with pesticide")
     weevil = Pest("Weevil", "", "use Diatomaceous earth; incorporate plants they hate like lavender; "+ 
                   "spray insecticides on them ")
-    bugMap = {"ant": ant, "aphid": aphid, "armyworm": armyworm, "bee": bee, "beetle": beetle, "bollworm": bollworm, 
-              "caterpillar": caterpillar, "earthworm": earthworm, "earwig": earwig, "grasshopper": grasshopper, "mite": mite,
+    bugMap = {"ants": ant, "aphids": aphid, "armyworm": armyworm, "bees": bee, "beetle": beetle, "bollworm": bollworm, 
+              "caterpillar": caterpillar, "earthworms": earthworm, "earwig": earwig, "grasshopper": grasshopper, "mite": mite,
               "mosquito": mosquito, "moth": moth, "sawfly": sawfly, "slug": slug, "snail": snail, "stern_borer": 
               stern_borer, "wasp": wasp, "weevil": weevil}
     return bugMap
@@ -46,6 +46,11 @@ def initializeBugs():
 # Output: List of bugs with recommendations
 # So basically an array with a dictionary 
 def compileBugs(bugDict: dict):
+    # from collections import defaultdict
+    # m = defaultdict(list)
+    # m['bees'].append((1.0, 2.0))
+    # bugDict = dict(m)
+
     bugMap = initializeBugs()
     bugList = []
     jsonList = []
@@ -59,13 +64,22 @@ def compileBugs(bugDict: dict):
             startSecond = startTime % 60
             endMinute = endTime // 60
             endSecond = endTime % 60
-            time = str(startMinute) + ":" + str(startSecond) + "-" + str(endMinute) + ":" + str(endSecond)
+            if startSecond < 10:
+                time = str(startMinute) + ":0" + str(startSecond)
+            else:
+                time = str(startMinute) + ":" + str(startSecond) + "-" + str(endMinute) + ":" + str(endSecond)
+            if endSecond < 10:
+                time += "-" + str(endMinute) + ":0" + str(endSecond)
+            else:
+                time += "-" + str(endMinute) + ":" + str(endSecond)
             times.append(time)
         curBug.timeStamps = times
         bugList.append(curBug)
     for pest in bugList:
-        jsonList.append([pest.name, pest.timeStamps, pest.description])
-    return jsonList
+        jsonList.append({"bug":pest.name, "timestamp":pest.timeStamps, "description":pest.description})
+    my_dict = {}
+    my_dict["insects"] = jsonList
+    return(json.dumps(my_dict))
 
-sample = {"caterpillar": [(13.12, 15.17), (23.47, 79.5)]}
-bugList = compileBugs(sample)
+# if __name__ == '__main__':
+#     compileBugs({})

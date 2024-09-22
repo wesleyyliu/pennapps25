@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from tempfile import NamedTemporaryFile
 from pydantic import BaseModel
 import pests, os, json
+import pest_inference
 
 app = FastAPI()
 
@@ -37,13 +38,19 @@ def detect_faces(cow: str = Form(...), video: UploadFile = File(...)):
             video.file.close()
         
         res = temp.name  # Pass temp.name to VideoCapture()
-    except Exception:
-        return {"message": "There was an error processing the file"}
-    finally:
-        #temp.close()  # the `with` statement above takes care of closing the file
-        os.remove(temp.name)
+        wesley_res = pest_inference.run_everything(res)
+        print(dict(wesley_res))
+        david_res = pests.compileBugs(dict(wesley_res))
+        print(david_res)
         
-    return {"message":[res]}
+    except Exception as e:
+        return {"message": "There was an error processing the file" + str(e)}
+    # finally:
+        #temp.close()  # the `with` statement above takes care of closing the file
+        # os.remove(temp.name)
+
+        
+    return david_res
    
 @app.get("/pests")
 def get_bugs():

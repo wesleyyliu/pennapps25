@@ -1,28 +1,18 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import ladybugIcon from "./images/ladybug.png";
 import LoadingAnimation from "./components/LoadingAnimation";
 import Slideshow from "./components/Slideshow";
 import { BugDetails } from "./interfaces";
 import ReactPlayer from "react-player";
+import checkmark_icon from "./images/checkmark_icon.png";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<Blob | null>(null);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [loader, setLoader] = useState(false);
   const [isSlidesOn, setIsSlidesOn] = useState(false);
-  const data: BugDetails[] = [
-    {
-      bug: "beetle",
-      description: "cc",
-      timestamp: ["cc"],
-    },
-    {
-      bug: "strawberry",
-      description: "dd",
-      timestamp: ["dd"],
-    },
-  ];
+  const [data, setData] = useState<Array<BugDetails>>([]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -37,9 +27,17 @@ function App() {
           body: formData,
         });
         const output = await res.json();
+        console.log(output["insects"])
+        console.log("API Output:", output);
+        if (Array.isArray(output["insects"])) {
+          setData(output["insects"]);
+        } else {
+          toast.error("Unexpected response format from API");
+          setData([]);  // Reset data to avoid errors
+        }
         setLoader(false);
         setIsSlidesOn(true);
-        console.log(output);
+
       } catch (err) {
         toast.error("There is an error");
 
@@ -131,7 +129,16 @@ function App() {
                   max-height="100%"
                 />
               </div>
-              <Slideshow props={data} />
+              {data.length > 0 ? (
+                <>
+                  <Slideshow data={data} />
+                </>
+              ) : (
+                <div className="flex flex-col justify-center items-center">
+                  <img className="size-56 mb-4" src={checkmark_icon} />
+                  <p className="text-2xl">No pests detected!</p>
+                </div>
+              )}
             </div>
           )}
         </div>
