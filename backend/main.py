@@ -25,23 +25,23 @@ class FileBody(BaseModel):
 
 @app.post("/upload")
 def detect_faces(cow: str = Form(...), video: UploadFile = File(...)):
-    # temp = NamedTemporaryFile(delete=False)
-    # try:
-    #     try:
-    #         contents = video.file.read()
-    #         with open(temp.filename, "wb") as f:
-    #             f.write(contents);
-    #     except Exception:
-    #         return {"message": "There was an error uploading the file"}
-    #     finally:
-    #         video.file.close()
+    temp = NamedTemporaryFile(delete=False)
+    try:
+        try:
+            contents = video.file.read()
+            with temp as f:
+                f.write(contents);
+        except Exception:
+            return {"message": "There was an error uploading the file"}
+        finally:
+            video.file.close()
         
-    #     # res = process_video(temp.name)  # Pass temp.name to VideoCapture()
-    # except Exception:
-    #     return {"message": "There was an error processing the file"}
-    # finally:
-    #     #temp.close()  # the `with` statement above takes care of closing the file
-    #     os.remove(temp.name)
+        res = temp.name  # Pass temp.name to VideoCapture()
+    except Exception:
+        return {"message": "There was an error processing the file"}
+    finally:
+        #temp.close()  # the `with` statement above takes care of closing the file
+        os.remove(temp.name)
         
-    return {"message":"sup"}
+    return {"message":[res]}
    
